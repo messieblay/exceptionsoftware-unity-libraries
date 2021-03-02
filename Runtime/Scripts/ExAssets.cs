@@ -148,7 +148,41 @@ public static class ExAssets
 #endif
     }
 
+    public static string GetGUID(this UnityEngine.Object obj)
+    {
+#if UNITY_EDITOR
+        return AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(obj));
+#else
+            return "";
+#endif
+    }
+    public static string GetAssetPath(this UnityEngine.Object obj)
+    {
+#if UNITY_EDITOR
+        return AssetDatabase.GetAssetPath(obj);
+#else
+            return "";
+#endif
+    }
+    public static void GetAssetPath(UnityEngine.Object obj, out string guid, out string path)
+    {
+#if UNITY_EDITOR
+        path = AssetDatabase.GetAssetPath(obj);
+        guid = AssetDatabase.AssetPathToGUID(path);
+#else
+            path = "";
+            guid = "";
+#endif
+    }
 
+    public static Object GetObjectFromGUID(this string guid)
+    {
+#if UNITY_EDITOR
+        return AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(guid), typeof(Object));
+#else
+            return null;
+#endif
+    }
 
 
 
