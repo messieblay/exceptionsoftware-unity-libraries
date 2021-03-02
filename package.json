@@ -1,0 +1,8 @@
+{
+  "name": "com.exception.libraries",
+  "displayName": "Exception Sofware Libraries",
+  "version": "1.0.0",
+  "unity": "2018.3",
+  "description": "Librerias de codigo utilies para unity",
+  "type": "library"
+}
