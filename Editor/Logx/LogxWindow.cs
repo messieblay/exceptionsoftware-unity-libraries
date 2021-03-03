@@ -36,7 +36,8 @@ public class LogxWindow : ExWindow<LogxWindow>
     protected override void DoEnable()
     {
 
-        _labels = System.Enum.GetNames(typeof(LogxEnum));
+        //_labels = System.Enum.GetNames(typeof(LogxEnum));
+        _labels = new string[] { "None" };
 
         Logx.onEntrysAdd -= OnEntryAdd;
         Logx.onEntrysAdd += OnEntryAdd;
@@ -54,6 +55,13 @@ public class LogxWindow : ExWindow<LogxWindow>
 
     void OnEntryAdd(List<LogEntry> entrys)
     {
+        foreach (var e in entrys)
+        {
+            if (_labels.Contains(e.msgType))
+            {
+                _labels = _labels.Add(e.msgType);
+            }
+        }
         FilterEntrys();
         if (_isScrollOnBottom)
         {
