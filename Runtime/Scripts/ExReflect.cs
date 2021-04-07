@@ -10,10 +10,8 @@ public class ExReflect
     public static Type[] GetTypes() { return GetTypes(CurrentAssembly); }
     public static Type[] GetTypes(Assembly assembly) { return assembly.GetTypes(); }
 
-    public static Type FindType(string type)
-    {
-        return AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes()).Where(s => s.FullName == type).FirstOrDefault();
-    }
+    public static Type FindType(string type) => AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes()).Where(s => s.FullName == type).FirstOrDefault();
+    public static List<Type> FindTypes(string type) => AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes()).Where(s => s.Name == type).ToList();
 
     /// <summary>
     /// Get All derived Clases of T
@@ -23,6 +21,7 @@ public class ExReflect
     public static List<Type> GetDerivedClasses<T>() { return GetDerivedClasses<T>(Assembly.GetAssembly(typeof(T))); }
     public static List<Type> GetDerivedClasses<T>(Assembly assembly) { return GetDerivedClasses(assembly, typeof(T)); }
     public static List<Type> GetDerivedClasses(Assembly assembly, Type derivedType) { return assembly.GetTypes().Where(t => t != derivedType && derivedType.IsAssignableFrom(t)).ToList(); }
+    public static List<Type> GetDerivedClassesAllAsseblys<T>() { return AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes()).Where(t => t != typeof(T) && typeof(T).IsAssignableFrom(t)).ToList(); }
 
     public static bool HasDerivedClasses<T>() { return HasDerivedClasses<T>(Assembly.GetAssembly(typeof(T))); }
     public static bool HasDerivedClasses<T>(Assembly assembly) { return HasDerivedClasses(assembly, typeof(T)); }

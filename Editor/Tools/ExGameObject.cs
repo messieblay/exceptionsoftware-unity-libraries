@@ -65,7 +65,7 @@ public static class ExGameObject
     public static void ClearChilds()
     {
         GameObject go = Selection.activeGameObject;
-        go.transform.Clear(); ;
+        go.transform.Clear();
     }
 
     public static void CreateParent(params Transform[] gos)

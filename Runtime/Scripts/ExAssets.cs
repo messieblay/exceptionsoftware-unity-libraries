@@ -60,8 +60,20 @@ public static class ExAssets
 
     public static T CreateAsset<T>(string path, string name, bool refresh = true) where T : ScriptableObject
     {
+#if UNITY_EDITOR 
+        return CreateAsset(path, name, typeof(T), refresh) as T;
+#else
+        return default(T);
+#endif
+    }
+    public static ScriptableObject CreateAsset(string path, string name, System.Type type, bool refresh = true)
+    {
 #if UNITY_EDITOR
-        T asset = ScriptableObject.CreateInstance<T>();
+        ScriptableObject asset = ScriptableObject.CreateInstance(type);
+        if (path.EndsWith("/"))
+        {
+            path = path.Remove(path.Length - 1);
+        }
         string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath(path + "/" + name + ".asset");
 
         AssetDatabase.CreateAsset(asset, assetPathAndName);
@@ -72,12 +84,10 @@ public static class ExAssets
         }
 
         return asset;
-#else
-        return default(T);
 #endif
     }
 
-    public static void SaveAsset(Object asset)
+    public static void SaveAsset(UnityEngine.Object asset)
     {
 #if UNITY_EDITOR
         EditorUtility.SetDirty(asset);
@@ -120,7 +130,7 @@ public static class ExAssets
     public static void RenamePrefab(GameObject prefab, string name)
     {
 #if UNITY_EDITOR
-        Object parentObject = PrefabUtility.GetCorrespondingObjectFromSource(prefab);
+        UnityEngine.Object parentObject = PrefabUtility.GetCorrespondingObjectFromSource(prefab);
         string path = AssetDatabase.GetAssetPath(prefab);
         UnityEditor.AssetDatabase.RenameAsset(path, name);
 #endif
@@ -137,6 +147,25 @@ public static class ExAssets
         {
             string assetPath = AssetDatabase.GUIDToAssetPath(guids[i]);
             T asset = AssetDatabase.LoadAssetAtPath<T>(assetPath);
+            if (asset != null)
+            {
+                assets.Add(asset);
+            }
+        }
+        return assets;
+#else
+        return new List<T>();
+#endif
+    }
+    public static List<UnityEngine.Object> FindAssetsByType(System.Type type, string nameFilter = "")
+    {
+#if UNITY_EDITOR
+        List<UnityEngine.Object> assets = new List<UnityEngine.Object>();
+        string[] guids = AssetDatabase.FindAssets(string.Format("{1} t: {0}", type.Name, nameFilter));
+        for (int i = 0; i < guids.Length; i++)
+        {
+            string assetPath = AssetDatabase.GUIDToAssetPath(guids[i]);
+            UnityEngine.Object asset = AssetDatabase.LoadAssetAtPath(assetPath, type);
             if (asset != null)
             {
                 assets.Add(asset);

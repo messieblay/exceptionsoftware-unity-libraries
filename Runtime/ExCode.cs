@@ -1239,6 +1239,26 @@ public static class ExCode
     /// <param name="text">Text.</param>
     public static string ToSentence(this string text)
     {
+        string finalString = string.Empty;
+
+        foreach (var s in text.Trim().Split(' '))
+        {
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (i == 0)
+                {
+                    finalString += char.ToUpper(s[i]);
+                }
+                else
+                {
+                    finalString += char.ToLower(s[i]);
+                }
+            }
+        }
+        return finalString;
+    }
+    public static string ToSentenceOld(this string text)
+    {
         StringBuilder newText = new StringBuilder(text.Length * 2);
         newText.Append(text[0]);
         for (int i = 1; i < text.Length; i++)
@@ -1252,7 +1272,6 @@ public static class ExCode
         }
         return newText.ToString();
     }
-
     /// <summary>
     /// Normaliza una cadena de texto para guardar el fichero
     /// Quita todos los acentos y Ñ de un string
