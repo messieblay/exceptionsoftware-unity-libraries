@@ -1237,7 +1237,7 @@ public static class ExCode
     /// </summary>
     /// <returns>The sentence.</returns>
     /// <param name="text">Text.</param>
-    public static string ToSentence(this string text)
+    public static string ToSentence(this string text, bool forzeLower = false)
     {
         string finalString = string.Empty;
 
@@ -1251,12 +1251,20 @@ public static class ExCode
                 }
                 else
                 {
-                    finalString += char.ToLower(s[i]);
+                    if (forzeLower)
+                    {
+                        finalString += char.ToLower(s[i]);
+                    }
+                    else
+                    {
+                        finalString += s[i];
+                    }
                 }
             }
         }
         return finalString;
     }
+
     public static string ToSentenceOld(this string text)
     {
         StringBuilder newText = new StringBuilder(text.Length * 2);
