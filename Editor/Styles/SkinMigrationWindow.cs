@@ -3,7 +3,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-namespace ExSoftware.ExEditor
+namespace ExceptionSoftware.ExEditor
 {
     public class SkinMigrationWindow : ExWindow<SkinMigrationWindow>
     {

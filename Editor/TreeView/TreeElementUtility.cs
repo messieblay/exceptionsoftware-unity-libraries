@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 
-namespace ExSoftware.TreeViewTemplate
+namespace ExceptionSoftware.TreeViewTemplate
 {
 
     // TreeElementUtility and TreeElement are useful helper classes for backend tree data structures.

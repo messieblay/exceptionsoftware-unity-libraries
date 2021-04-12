@@ -3,7 +3,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-namespace ExSoftware.ExEditor
+namespace ExceptionSoftware.ExEditor
 {
     public static class EditorCollapseAll
     {

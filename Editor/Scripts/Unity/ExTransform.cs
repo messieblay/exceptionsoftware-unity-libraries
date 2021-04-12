@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace ExSoftware.ExEditor
+namespace ExceptionSoftware.ExEditor
 {
     [CanEditMultipleObjects, CustomEditor(typeof(Transform))]
     public class ExTransform : Editor

@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-namespace ExSoftware.ExEditor
+namespace ExceptionSoftware.ExEditor
 {
     public class EditorIconViewer : EditorWindow
     {

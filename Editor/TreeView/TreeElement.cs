@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace ExSoftware.TreeViewTemplate
+namespace ExceptionSoftware.TreeViewTemplate
 {
 
     [Serializable]

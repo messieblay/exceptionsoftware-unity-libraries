@@ -2,7 +2,7 @@
 using UnityEditor;
 #endif
 using UnityEngine;
-namespace ExSoftware.ExEditor
+namespace ExceptionSoftware.ExEditor
 {
     [System.Obsolete("Creo que está obsoleto. ¿Funcionaba mal? Si, creo que si")]
     public static class PivotUtilities

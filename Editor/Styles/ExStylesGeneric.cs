@@ -3,7 +3,7 @@ using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ExSoftware.ExEditor {
+namespace ExceptionSoftware.ExEditor {
 	public abstract class ExStylesGeneric {
 
 		//		protected virtual string EditorResourcePath{ get { return "Assets/ExSoftware/ExEditor/Editor/Res/"; } }

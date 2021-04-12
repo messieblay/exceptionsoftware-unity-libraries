@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Timers;
 using UnityEditor;
-namespace ExSoftware.ExEditor
+namespace ExceptionSoftware.ExEditor
 {
 
     [InitializeOnLoad]

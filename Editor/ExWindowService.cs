@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace ExSoftware.ExEditor
+namespace ExceptionSoftware.ExEditor
 {
     public static class ExWindowService
     {

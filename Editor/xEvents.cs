@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ExSoftware.ExEditor
+namespace ExceptionSoftware.ExEditor
 {
     public class xEvents
     {

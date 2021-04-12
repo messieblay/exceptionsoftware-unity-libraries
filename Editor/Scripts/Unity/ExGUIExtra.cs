@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-namespace ExSoftware.ExEditor
+namespace ExceptionSoftware.ExEditor
 {
     public static class ExGUIExtra
     {

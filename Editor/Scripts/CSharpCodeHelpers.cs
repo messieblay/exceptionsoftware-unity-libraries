@@ -6,7 +6,7 @@ using System.Text;
 
 ////REVIEW: this seems like it should be #if UNITY_EDITOR
 
-namespace ExSoftware.ExEditor
+namespace ExceptionSoftware.ExEditor
 {
     public static class CSharpCodeHelpers
     {
@@ -124,6 +124,10 @@ namespace ExSoftware.ExEditor
                         {
                             result = result.Substring(1);
                             result = result.Remove(result.Length - 1);
+                            result = result.Trim('\r', '\n').Trim();
+                            //if (result.StartsWith("\n")) { 
+                            //result=result.
+                            //}
                             nestedClasses.Add(new NestedClass(nt.Name, result));
                             break;
                         }

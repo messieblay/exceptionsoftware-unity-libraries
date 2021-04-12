@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace ExSoftware.ExEditor
+namespace ExceptionSoftware.ExEditor
 {
     public class ExWindowScene<T> : ExWindow<T> where T : ExWindow
     {

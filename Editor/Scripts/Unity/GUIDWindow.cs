@@ -1,7 +1,7 @@
 ﻿//  06e687f68dd96f0448c6d8217bbcf608
 using UnityEditor;
 using UnityEngine;
-namespace ExSoftware.ExEditor
+namespace ExceptionSoftware.ExEditor
 {
     public class GUIDWindow : ExWindow<GUIDWindow>
     {
