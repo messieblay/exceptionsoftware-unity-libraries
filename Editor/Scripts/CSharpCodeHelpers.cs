@@ -46,13 +46,18 @@ namespace ExceptionSoftware.ExEditor
         }
 
         ////TODO: this one should add the @escape automatically so no other code has to worry
-        public static string MakeIdentifier(string name, string suffix = "")
+        public static string MakeIdentifier(string name, string suffix = "", bool firstCharacterLow = false)
         {
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentNullException(nameof(name));
 
             if (char.IsDigit(name[0]))
                 name = "_" + name;
+
+            if (firstCharacterLow)
+            {
+                name = char.ToLower(name[0]) + name.Substring(1);
+            }
 
             // See if we have invalid characters in the name.
             var nameHasInvalidCharacters = false;
