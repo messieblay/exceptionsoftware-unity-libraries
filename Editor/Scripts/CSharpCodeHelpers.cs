@@ -98,7 +98,7 @@ namespace ExceptionSoftware.ExEditor
 
 
 
-        public static List<NestedClass> GetNestedClassCode(Type t)
+        public static ClassReaded GetNestedClassCode(Type t)
         {
             string path = FileUtils.LocateFile($"{t.Name}.cs");
             string log = t.Name + "\n";
@@ -106,6 +106,13 @@ namespace ExceptionSoftware.ExEditor
             log += path + "\n";
 
             string fileText = File.ReadAllText(path);
+
+            ClassReaded classReaded = new ClassReaded();
+
+            //Namespaces
+            classReaded.namespaces = fileText.Split('\n').Where(s => s.Trim().StartsWith("using")).ToList();
+
+            //Nested classes
             List<NestedClass> nestedClasses = new List<NestedClass>();
             foreach (var nt in t.GetNestedTypes())
             {
@@ -142,9 +149,16 @@ namespace ExceptionSoftware.ExEditor
             }
 
             nestedClasses.TrimExcess();
-            return nestedClasses;
+            classReaded.NestedClasses = nestedClasses;
+            return classReaded;
         }
 
+    }
+
+    public class ClassReaded
+    {
+        public List<string> namespaces = new List<string>();
+        public List<NestedClass> NestedClasses = new List<NestedClass>();
     }
     public class NestedClass
     {
