@@ -214,7 +214,11 @@ public static class ExAssets
     }
 
 
-
+    public static void RenameAsset(ScriptableObject scriptable, string newname)
+    {
+        string path = AssetDatabase.GetAssetPath(scriptable);
+        AssetDatabase.RenameAsset(path, newname);
+    }
 
 
 

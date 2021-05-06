@@ -1288,7 +1288,7 @@ public static class ExCode
     /// <param name="text">Text.</param>
     public static string ToFileString(this string text) => QuitAccentsAndN(text);
 
-    static string QuitAccentsAndN(string texto)
+    public static string QuitAccentsAndN(string texto)
     {
         string con = "áàäéèëíìïóòöúùuñÁÀÄÉÈËÍÌÏÓÒÖÚÙÜÑçÇ";
         string sin = "aaaeeeiiiooouuunAAAEEEIIIOOOUUUNcC";

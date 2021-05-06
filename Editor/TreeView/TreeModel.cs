@@ -33,10 +33,8 @@ namespace ExceptionSoftware.TreeViewTemplate
             SetData(data);
         }
 
-        public T Find(int id)
-        {
-            return m_Data.FirstOrDefault(element => element.id == id);
-        }
+        public T Find(int id) => m_Data.FirstOrDefault(element => element.id == id);
+        public IList<T> Find(IList<int> ids) => ids.Select(id => m_Data.First(element => element.id == id)).ToList();
 
         public void SetData(IList<T> data)
         {
