@@ -197,7 +197,7 @@ public static class XMLUtils
         return result;
     }
 
-    //public static SaveGameData Clone(SaveGameData savegameToClone) => ReadFromBuffer<SaveGameData>(WriteToBuffer(savegameToClone));
+    public static T Clone<T>(T savegameToClone) => ReadFromBuffer<T>(WriteToBuffer(savegameToClone));
 
     #endregion
 }
