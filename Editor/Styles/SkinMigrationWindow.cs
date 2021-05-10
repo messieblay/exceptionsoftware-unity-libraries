@@ -8,7 +8,7 @@ namespace ExceptionSoftware.ExEditor
     public class SkinMigrationWindow : ExWindow<SkinMigrationWindow>
     {
         // Unity Menu item
-        [MenuItem("Tools/Ex Software/Styles/Skin Migration", false, 1000)]
+        [MenuItem("Tools/Styles/Skin Migration", false, 3000)]
         static void OpenMainShaderGraph()
         {
 
