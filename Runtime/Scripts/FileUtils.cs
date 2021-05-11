@@ -15,6 +15,17 @@ public class FileUtils
     {
         return ASSETS_FOLDER + path.Replace(Application.dataPath + BACKSLASH, string.Empty);
     }
+
+    public static string ConvertRelativePathToAbsolute(string path)
+    {
+        if (path.StartsWith("Assets/"))
+        {
+            path = path.Substring(6);
+        }
+        return ConcatPaths(Application.dataPath, path);
+    }
+
+
     public static string ConvertBackslash(string path)
     {
         path = path.Replace("\\", BACKSLASH);
@@ -29,6 +40,21 @@ public class FileUtils
         return path;
     }
 
+    public static string ConcatPaths(string pathA, string pathB)
+    {
+        pathA = ConvertBackslash(pathA.Trim());
+        pathB = ConvertBackslash(pathB.Trim());
+
+        while (pathA.EndsWith(BACKSLASH))
+        {
+            pathA = pathA.Remove(pathA.Length - 1);
+        }
+        while (pathB.StartsWith(BACKSLASH))
+        {
+            pathB = pathB.Substring(1);
+        }
+        return pathA + BACKSLASH + pathB;
+    }
 
     #endregion
     #region File management

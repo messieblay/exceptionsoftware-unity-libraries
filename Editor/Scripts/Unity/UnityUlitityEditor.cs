@@ -84,7 +84,7 @@ public static class UnityUlitityEditor
 
 
 
-    [MenuItem("Tools/General/Force recompile", false, 3000)]
+    [MenuItem("Tools/Force recompile", false, 9000)]
     public static void ForceRecompile()
     {
         AssetDatabase.StartAssetEditing();
