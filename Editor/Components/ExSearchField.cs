@@ -103,7 +103,7 @@ namespace ExceptionSoftware.ExEditor
         {
             r.width = Mathf.Max(30, r.width);
 
-            Rect[] rs = r.SplitSuperFixed(ExRect.RectBorder.Right, _styleButton.fixedWidth);
+            Rect[] rs = r.Split(RectBorder.Right, _styleButton.fixedWidth);
 
             if (m_searchLabelSize < 0)
             {

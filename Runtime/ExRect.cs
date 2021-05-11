@@ -1,16 +1,18 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+public enum SplitMode { Vertical, Horizontal }
+
+public enum RectBorder
+{
+    Left,
+    Up,
+    Right,
+    Down
+}
 public static class ExRect
 {
 
-    public enum RectBorder
-    {
-        Left,
-        Up,
-        Right,
-        Down
-    }
 
     public static Rect Next(this Rect r, RectBorder direction)
     {
@@ -165,6 +167,11 @@ public static class ExRect
     }
 
 
+
+    [System.Obsolete("Method renamed. Use Split instead")]
+    public static Rect[] SplitSuperFixed(this Rect r, RectBorder option, params float[] parts) => Split(r, option, parts);
+
+
     /// <summary>
     /// Splits the super fixed.
     /// 
@@ -176,7 +183,7 @@ public static class ExRect
     ///     Value <  0 == Percent
     ///     Value >= 1 == Fixed Pixels
     /// </param>
-    public static Rect[] SplitSuperFixed(this Rect r, RectBorder option, params float[] parts)
+    public static Rect[] Split(this Rect r, RectBorder option, params float[] parts)
     {
         float freespace;
         float fixedSize = 0;
@@ -264,29 +271,8 @@ public static class ExRect
         return rects;
     }
 
-    public static Rect[] SplitVertical(this Rect r, params float[] parts)
-    {
-        return SplitSuperFixedFlexible(r, true, Vector2.zero, parts);
-    }
-    public static Rect[] SplitHorizontal(this Rect r, params float[] parts)
-    {
-        return SplitSuperFixedFlexible(r, false, Vector2.zero, parts);
-    }
-
-    public static Rect[] SplitVertical(this Rect r, Vector2 padding, params float[] parts)
-    {
-        return SplitSuperFixedFlexible(r, true, padding, parts);
-    }
-    public static Rect[] SplitHorizontal(this Rect r, Vector2 padding, params float[] parts)
-    {
-        return SplitSuperFixedFlexible(r, false, padding, parts);
-    }
-
-
-    public static Rect[] SplitSuperFixedFlexible(this Rect r, bool vertical, params float[] parts)
-    {
-        return SplitSuperFixedFlexible(r, vertical, Vector2.zero, parts);
-    }
+    [System.Obsolete("Method renamed. Use Split instead")]
+    public static Rect[] SplitSuperFixedFlexible(this Rect r, bool vertical, params float[] parts) => Split(r, vertical ? SplitMode.Vertical : SplitMode.Horizontal, Vector2.zero, parts);
 
 
     /// <summary>
@@ -301,7 +287,23 @@ public static class ExRect
     ///     Value >= 1 == Fixed Pixels
     /// </param>
     /// <returns></returns>
-    public static Rect[] SplitSuperFixedFlexible(this Rect r, bool vertical, Vector2 padding, params float[] parts)
+    [System.Obsolete("Method renamed. Use Split instead")]
+    public static Rect[] SplitSuperFixedFlexible(this Rect r, bool vertical, Vector2 padding, params float[] parts) => Split(r, vertical ? SplitMode.Vertical : SplitMode.Horizontal, padding, parts);
+
+    public static Rect[] Split(this Rect r, SplitMode splitMode, params float[] parts) => Split(r, splitMode, Vector2.zero, parts);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="r"></param>
+    /// <param name="vertical"></param>
+    /// <param name="padding"></param>
+    /// <param name="parts">Parts. 
+    ///     Value <  0 == Flexible Space
+    ///     0 < Value < 1 == Percent
+    ///     Value >= 1 == Fixed Pixels
+    /// </param>
+    /// <returns></returns>
+    public static Rect[] Split(this Rect r, SplitMode splitMode, Vector2 padding, params float[] parts)
     {
         float freespace;
         float sizeFilled = 0;
@@ -327,7 +329,7 @@ public static class ExRect
         float fixedTemp = 0;
         int numFlexibleSpaces = 0;
 
-        if (vertical)
+        if (splitMode == SplitMode.Vertical)
         {
             sizeFull = r.height;
         }
@@ -350,7 +352,7 @@ public static class ExRect
                 else
                 {
                     //Percent
-                    if (vertical)
+                    if (splitMode == SplitMode.Vertical)
                     {
                         fixedTemp = parts[x] * r.height;
                     }
@@ -385,7 +387,7 @@ public static class ExRect
             }
         }
 
-        if (vertical)
+        if (splitMode == SplitMode.Vertical)
         {
             for (int x = 0; x < sizes.Count; x++)
             {
@@ -417,6 +419,13 @@ public static class ExRect
 
         return rects;
     }
+
+    public static Rect[] SplitVertical(this Rect r, params float[] parts) => Split(r, SplitMode.Vertical, Vector2.zero, parts);
+    public static Rect[] SplitHorizontal(this Rect r, params float[] parts) => Split(r, SplitMode.Horizontal, Vector2.zero, parts);
+
+    public static Rect[] SplitVertical(this Rect r, Vector2 padding, params float[] parts) => Split(r, SplitMode.Vertical, padding, parts);
+    public static Rect[] SplitHorizontal(this Rect r, Vector2 padding, params float[] parts) => Split(r, SplitMode.Horizontal, padding, parts);
+
 
 
     public static Rect[][] SplitGrid(this Rect r, int columns, int rows)

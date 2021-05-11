@@ -111,7 +111,7 @@ namespace ExceptionSoftware.ExEditor
                     float height = CalculeComponentHeight();
                     _componentSize.y = height;
 
-                    Rect[] rs = _headerRect.SplitSuperFixed(ExRect.RectBorder.Right, 200, 10, 50);
+                    Rect[] rs = _headerRect.Split(RectBorder.Right, 200, 10, 50);
                     _actionDropRect = rs[1];
                     _searchFieldRect = rs[3];
                     _searchFieldRect.y += 2;
@@ -143,12 +143,12 @@ namespace ExceptionSoftware.ExEditor
 
             _componentSize = r.size;
 
-            Rect[] rs = r.SplitSuperFixed(ExRect.RectBorder.Up, _headerHeight);
+            Rect[] rs = r.Split(RectBorder.Up, _headerHeight);
             _headerRect = rs[0];
             _headerRect.width -= (float)_style.margin.left + _style.fixedWidth + 2;
-            _searchFieldRect = _headerRect.SplitSuperFixed(ExRect.RectBorder.Left, EditorStyles.boldLabel.CalcSize(new GUIContent(_title)).x)[1];
+            _searchFieldRect = _headerRect.Split(RectBorder.Left, EditorStyles.boldLabel.CalcSize(new GUIContent(_title)).x)[1];
 
-            rs = rs[1].SplitSuperFixed(ExRect.RectBorder.Down, _footerHeight);
+            rs = rs[1].Split(RectBorder.Down, _footerHeight);
 
             _contentRect = rs[0];
             _footerRect = rs[1];
