@@ -3,5 +3,9 @@
   "displayName": "Ex Libraries",
   "version": "1.0.0",
   "description": "Librerias de codigo utilies para unity",
-  "type": "library"
+  "author": {
+    "name": "Exception Software",
+    "email": "marcoblay@gmail.com",
+    "url": "https://github.com/messieblay/exceptionsoftware-unity-libraries"
+  }
 }
