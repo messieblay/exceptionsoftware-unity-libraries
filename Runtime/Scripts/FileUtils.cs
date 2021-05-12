@@ -13,7 +13,7 @@ public class FileUtils
     #region Paths 
     public static string ConvertPathToRelative(string path)
     {
-        return ASSETS_FOLDER + path.Replace(Application.dataPath + BACKSLASH, string.Empty);
+        return ASSETS_FOLDER + ConvertBackslash(path).Replace(Application.dataPath + BACKSLASH, string.Empty);
     }
 
     public static string ConvertRelativePathToAbsolute(string path)
