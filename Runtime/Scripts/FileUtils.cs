@@ -13,7 +13,9 @@ public class FileUtils
     #region Paths 
     public static string ConvertPathToRelative(string path)
     {
-        return ASSETS_FOLDER + ConvertBackslash(path).Replace(Application.dataPath + BACKSLASH, string.Empty);
+        var pathproject = Application.dataPath.Substring(0, Application.dataPath.Length - 6);
+        var relative = ConvertBackslash(path).Replace(pathproject, string.Empty);
+        return relative;
     }
 
     public static string ConvertRelativePathToAbsolute(string path)
