@@ -249,9 +249,14 @@ namespace ExceptionSoftware.ExEditor
                     y += rowHeight + 8.0f;
                     rowHeight = 0.0f;
                 }
-
                 draw.Rect = new Rect(x, y, width, height);
-                draw.copyText = "EditorGUIUtility.FindTexture( \"" + texture.name + "\" )";
+
+#if UNITY_2020_1_OR_NEWER
+                draw.copyText = "EditorGUIUtility.IconContent( \"" + texture.name + "\" ).icon";
+#else
+                draw.copyText = "EditorGUIUtility.FindTexture( \"" + texture.name + "\" )\n" + AssetDatabase.GetAssetPath(texture);
+#endif
+
                 draw.title = texture.name;
 
                 rowHeight = Mathf.Max(rowHeight, height);
@@ -321,7 +326,8 @@ namespace ExceptionSoftware.ExEditor
 
                 _drawings.Add(draw);
             }
-            _maxY = _drawings.Last().Rect.yMax;
+            if (_drawings != null)
+                _maxY = _drawings.Last().Rect.yMax;
         }
 
         void CopyText(string pText)
