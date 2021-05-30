@@ -33,7 +33,6 @@ public static class UnityUlitityEditor
 
         go_count++;
         Component[] components = g.GetComponents<Component>();
-        var r = 0;
         for (int i = 0; i < components.Length; i++)
         {
             components_count++;

@@ -26,12 +26,6 @@ namespace ExceptionSoftware.ExEditor
 
         static bool _byColliders;
 
-        static bool _alignAffectX = true;
-
-        static bool _alignAffectY = true;
-
-        static bool _alignAffectZ = true;
-
         static double _forceExpandTime;
 
         static GUIStyle _collapsedStyle;

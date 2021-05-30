@@ -12,8 +12,7 @@ public static class SceneUtility
 
     public static void ProcessAllScenes(ProcessAllScenesDelegate _callback)
     {
-
-        if (!EditorApplication.SaveCurrentSceneIfUserWantsTo())
+        if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
         {
             return;
         }
@@ -31,8 +30,6 @@ public static class SceneUtility
 
         for (int i = 0; i < paths.Count; i++)
         {
-            //Scene scene = SceneManager.GetSceneByBuildIndex(i);
-            //var scenePath = scenePaths[i];
             EditorSceneManager.OpenScene(paths[i], OpenSceneMode.Single);
             string sceneName = EditorSceneManager.GetActiveScene().name;
             EditorUtility.DisplayProgressBar("Procesnado escenas", $"Procesando {sceneName} ", (float)i / sceneCount);
@@ -51,7 +48,7 @@ public static class SceneUtility
         }
 
         EditorUtility.ClearProgressBar();
-        EditorApplication.NewScene();
+        EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
     }
 
 
