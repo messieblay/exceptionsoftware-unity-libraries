@@ -6,7 +6,7 @@ namespace ExceptionSoftware.ExEditor
     public class GUIDWindow : ExWindow<GUIDWindow>
     {
         // Unity Menu item
-        [MenuItem("Tools/Styles/GUID Tools", false, 3000)]
+        [MenuItem("Tools/Styles/GUID Tools", priority = ExConstants.MENU_ITEM_PRIORITY)]
         static void OpenMainShaderGraph()
         {
 

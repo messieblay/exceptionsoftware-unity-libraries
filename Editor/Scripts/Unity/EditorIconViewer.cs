@@ -74,7 +74,7 @@ namespace ExceptionSoftware.ExEditor
         protected Vector2 _scrollPos;
         protected float _drawScale;
 
-        [MenuItem("Tools/Ex Software/Styles/Editor Icons")]
+        [MenuItem("Tools/Styles/Editor Icons", priority = ExConstants.MENU_ITEM_PRIORITY)]
         static void Init()
         {
             EditorIconViewer window = (EditorIconViewer)GetWindow(typeof(EditorIconViewer), false, "Editor Icon Viewer");

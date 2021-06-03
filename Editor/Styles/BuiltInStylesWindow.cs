@@ -9,7 +9,7 @@ namespace ExceptionSoftware.ExEditor
 {
     public class BuiltInStylesWindow : EditorWindow
     {
-        [MenuItem("Window/ExSoftware/Styles/Built-in styles and icons")]
+        [MenuItem("Tools/Styles/Built-in styles and icons", priority = ExConstants.MENU_ITEM_PRIORITY)]
         public static void ShowWindow()
         {
             BuiltInStylesWindow w = (BuiltInStylesWindow)EditorWindow.GetWindow<BuiltInStylesWindow>();
