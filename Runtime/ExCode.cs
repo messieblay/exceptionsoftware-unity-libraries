@@ -187,6 +187,7 @@ public static class ExCode
     /// <returns>List without nulls</returns>
     public static List<T> ClearNulls<T>(this List<T> list)
     {
+        if (list == null) return null;
         int x = 0;
         while (x < list.Count)
         {
