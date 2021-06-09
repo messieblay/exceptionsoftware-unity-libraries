@@ -5,10 +5,10 @@ using System.Reflection;
 
 public class ExReflect
 {
-    public static Assembly CurrentAssembly { get { return Assembly.GetExecutingAssembly(); } }
+    public static Assembly CurrentAssembly => Assembly.GetExecutingAssembly();
     #region Classes
-    public static Type[] GetTypes() { return GetTypes(CurrentAssembly); }
-    public static Type[] GetTypes(Assembly assembly) { return assembly.GetTypes(); }
+    public static Type[] GetTypes() => GetTypes(CurrentAssembly);
+    public static Type[] GetTypes(Assembly assembly) => assembly.GetTypes();
 
     public static Type FindType(string type) => AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes()).Where(s => s.FullName == type).FirstOrDefault();
     public static List<Type> FindTypes(string type) => AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes()).Where(s => s.Name == type).ToList();
@@ -18,20 +18,20 @@ public class ExReflect
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    public static List<Type> GetDerivedClasses<T>() { return GetDerivedClasses<T>(Assembly.GetAssembly(typeof(T))); }
-    public static List<Type> GetDerivedClasses<T>(Assembly assembly) { return GetDerivedClasses(assembly, typeof(T)); }
-    public static List<Type> GetDerivedClasses(Assembly assembly, Type derivedType) { return assembly.GetTypes().Where(t => t != derivedType && derivedType.IsAssignableFrom(t)).ToList(); }
-    public static List<Type> GetDerivedClassesAllAsseblys<T>() { return AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes()).Where(t => t != typeof(T) && typeof(T).IsAssignableFrom(t)).ToList(); }
+    public static List<Type> GetDerivedClasses<T>() => GetDerivedClasses<T>(Assembly.GetAssembly(typeof(T)));
+    public static List<Type> GetDerivedClasses<T>(Assembly assembly) => GetDerivedClasses(assembly, typeof(T));
+    public static List<Type> GetDerivedClasses(Assembly assembly, Type derivedType) => assembly.GetTypes().Where(t => t != derivedType && derivedType.IsAssignableFrom(t)).ToList();
+    public static List<Type> GetDerivedClassesAllAsseblys<T>() => AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes()).Where(t => t != typeof(T) && typeof(T).IsAssignableFrom(t)).ToList();
 
-    public static bool HasDerivedClasses<T>() { return HasDerivedClasses<T>(Assembly.GetAssembly(typeof(T))); }
-    public static bool HasDerivedClasses<T>(Assembly assembly) { return HasDerivedClasses(assembly, typeof(T)); }
-    public static bool HasDerivedClasses(Assembly assembly, Type derivedType) { return assembly.GetTypes().Where(t => t != derivedType && derivedType.IsAssignableFrom(t)).Count() > 0; }
+    public static bool HasDerivedClasses<T>() => HasDerivedClasses<T>(Assembly.GetAssembly(typeof(T)));
+    public static bool HasDerivedClasses<T>(Assembly assembly) => HasDerivedClasses(assembly, typeof(T));
+    public static bool HasDerivedClasses(Assembly assembly, Type derivedType) => assembly.GetTypes().Where(t => t != derivedType && derivedType.IsAssignableFrom(t)).Count() > 0;
 
 
 
-    public static List<Type> GetFinalDerivedClasses<T>() { return GetFinalDerivedClasses(Assembly.GetAssembly(typeof(T)), typeof(T)); }
-    public static List<Type> GetFinalDerivedClasses<T>(Assembly assembly) { return GetFinalDerivedClasses(assembly, typeof(T)); }
-    public static List<Type> GetFinalDerivedClasses(Assembly assembly, Type derived) { return GetDerivedClasses(assembly, derived).Where(s => !HasDerivedClasses(assembly, s)).ToList(); }
+    public static List<Type> GetFinalDerivedClasses<T>() => GetFinalDerivedClasses(Assembly.GetAssembly(typeof(T)), typeof(T));
+    public static List<Type> GetFinalDerivedClasses<T>(Assembly assembly) => GetFinalDerivedClasses(assembly, typeof(T));
+    public static List<Type> GetFinalDerivedClasses(Assembly assembly, Type derived) => GetDerivedClasses(assembly, derived).Where(s => !HasDerivedClasses(assembly, s)).ToList();
 
     /// <summary>
     /// Get All types found in a namespace
@@ -39,10 +39,8 @@ public class ExReflect
     /// <param name="assembly"></param>
     /// <param name="nameSpace"></param>
     /// <returns></returns>
-    public static Type[] GetTypesInNamespace(Assembly assembly, string nameSpace)
-    {
-        return assembly.GetTypes().Where(t => String.Equals(t.Namespace, nameSpace, StringComparison.Ordinal)).ToArray();
-    }
+    public static Type[] GetTypesInNamespace(Assembly assembly, string nameSpace) => assembly.GetTypes().Where(t => String.Equals(t.Namespace, nameSpace, StringComparison.Ordinal)).ToArray();
+
 
     /// <summary>
     ///  Get All types found.
@@ -50,10 +48,8 @@ public class ExReflect
     /// </summary>
     /// <param name="nameSpace"></param>
     /// <returns></returns>
-    public static Type[] GetTypesInNamespace(string nameSpace)
-    {
-        return CurrentAssembly.GetTypes().Where(t => String.Equals(t.Namespace, nameSpace, StringComparison.Ordinal)).ToArray();
-    }
+    public static Type[] GetTypesInNamespace(string nameSpace) => CurrentAssembly.GetTypes().Where(t => String.Equals(t.Namespace, nameSpace, StringComparison.Ordinal)).ToArray();
+
 
 
     public static IEnumerable<Type> ForeachTypeInAssembly(Assembly a)
@@ -64,15 +60,11 @@ public class ExReflect
         }
     }
 
-    public static IEnumerable<Type> ForeachDerivedClasses<T>()
-    {
-        return ForeachDerivedClasses(typeof(T));
-    }
+    public static IEnumerable<Type> ForeachDerivedClasses<T>() => ForeachDerivedClasses(typeof(T));
 
-    public static IEnumerable<Type> ForeachDerivedClasses(Type type)
-    {
-        return Assembly.GetAssembly(type).GetTypes().Where(t => t != type && type.IsAssignableFrom(t)).AsEnumerable();
-    }
+
+    public static IEnumerable<Type> ForeachDerivedClasses(Type type) => Assembly.GetAssembly(type).GetTypes().Where(t => t != type && type.IsAssignableFrom(t)).AsEnumerable();
+
     public static bool IsSubclassOfRawGeneric(Type generic, Type toCheck)
     {
         while (toCheck != null && toCheck != typeof(object))
@@ -112,28 +104,17 @@ public class ExReflect
     #endregion
     #region Methods
 
-    public static List<MethodInfo> GetMethodsWithAttribute<T>()
-    {
-        return GetMethodsWithAttribute<T>(Assembly.GetAssembly(typeof(T)));
-    }
+    public static List<MethodInfo> GetMethodsWithAttribute<T>() => GetMethodsWithAttribute<T>(Assembly.GetAssembly(typeof(T)));
 
-    public static List<MethodInfo> GetMethodsWithAttribute<T>(Assembly assembly)
-    {
-        return assembly.GetTypes().SelectMany(t => t.GetMethods()).Where(m => m.GetCustomAttributes(typeof(T), false).Length > 0).ToList();
-    }
+    public static List<MethodInfo> GetMethodsWithAttribute<T>(Assembly assembly) => assembly.GetTypes().SelectMany(t => t.GetMethods()).Where(m => m.GetCustomAttributes(typeof(T), false).Length > 0).ToList();
+
 
     #endregion
     #region Properties
 
-    public static List<PropertyInfo> GetPropertiesWithAttribute<T>()
-    {
-        return GetPropertiesWithAttribute<T>(Assembly.GetAssembly(typeof(T)));
-    }
+    public static List<PropertyInfo> GetPropertiesWithAttribute<T>() => GetPropertiesWithAttribute<T>(Assembly.GetAssembly(typeof(T)));
+    public static List<PropertyInfo> GetPropertiesWithAttribute<T>(Assembly assembly) => assembly.GetTypes().SelectMany(t => t.GetProperties()).Where(m => m.GetCustomAttributes(typeof(T), false).Length > 0).ToList();
 
-    public static List<PropertyInfo> GetPropertiesWithAttribute<T>(Assembly assembly)
-    {
-        return assembly.GetTypes().SelectMany(t => t.GetProperties()).Where(m => m.GetCustomAttributes(typeof(T), false).Length > 0).ToList();
-    }
 
     #endregion
 
@@ -145,18 +126,9 @@ public class ExReflect
     /// <typeparam name="K">Class type</typeparam>
     /// <typeparam name="T">Attribute type</typeparam>
     /// <returns></returns>
-    public static T[] GetAttributesOfClass<K, T>()
-    {
-        return Attribute.GetCustomAttributes(typeof(K)).OfType<T>().ToArray();
-    }
-    public static IEnumerable<T> GetAttributesOfClassAsEnumerable<K, T>()
-    {
-        return Attribute.GetCustomAttributes(typeof(K)).OfType<T>();
-    }
-    public static IEnumerable<T> GetAttributesOfClassAsEnumerable<T>(Type classType)
-    {
-        return Attribute.GetCustomAttributes(classType).OfType<T>();
-    }
+    public static T[] GetAttributesOfClass<K, T>() => Attribute.GetCustomAttributes(typeof(K)).OfType<T>().ToArray();
+    public static IEnumerable<T> GetAttributesOfClassAsEnumerable<K, T>() => Attribute.GetCustomAttributes(typeof(K)).OfType<T>();
+    public static IEnumerable<T> GetAttributesOfClassAsEnumerable<T>(Type classType) => Attribute.GetCustomAttributes(classType).OfType<T>();
 
     public static void GetAttributeOfClass<T>(Type classType, System.Action<Type, T> action)
     {
@@ -186,6 +158,7 @@ public class ExReflect
             }
         }
     }
+
     #endregion
 
 }

@@ -183,7 +183,6 @@ namespace ExceptionSoftware.ExEditor
                     GUI.skin.button.padding = new RectOffset(6, 6, 2, 3);
                     Vector3 localEulerAngles = (base.serializedObject.targetObject as Transform).localEulerAngles;
                     ExTransform.Axes axes = this.CheckDifference(this.mRot);
-                    ExTransform.Axes axes2 = ExTransform.Axes.None;
 
                     GUILayoutOption opt = GUILayout.MinWidth(30f);
                     SetColor(redLt, 0.5f);
