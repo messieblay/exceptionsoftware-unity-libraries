@@ -125,7 +125,7 @@ public static class CollectionsExtensions
     /// <summary>
     /// Empty the specified list.
     /// </summary> 
-    public static bool Empty<T>(this List<T> list) => list == null ? true : list.Count == 0;
+    public static bool Empty<T>(this List<T> list) => list == null || list.Count == 0;
 
     /// <summary>
     /// Counts the real.
@@ -309,7 +309,7 @@ public static class CollectionsExtensions
     #endregion
 
     #region Arrays
-
+    public static bool IsNullOrEmpty<T>(this T[] array) => array == null || array.Length == 0;
 
     public static T[] Clear<T>(this T[] array)
     {

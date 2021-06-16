@@ -137,24 +137,52 @@ public static class ExAssets
     }
 
 
-
+    /// <summary>
+    /// Search asset by Type with 
+    /// AssetDatabase.FindAssets($"t: {typeof(T).Name} {nameFilter}");
+    /// and 
+    /// Resources.FindObjectsOfTypeAll<T>()
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="nameFilter"></param>
+    /// <returns></returns>
     public static List<T> FindAssetsByType<T>(string nameFilter = "") where T : UnityEngine.Object
     {
-#if UNITY_EDITOR
+
         List<T> assets = new List<T>();
-        string[] guids = AssetDatabase.FindAssets(string.Format("{1} t: {0}", typeof(T).Name, nameFilter));
+        T[] assetsResourceS = Resources.FindObjectsOfTypeAll<T>();
+        if (assetsResourceS != null && assetsResourceS.Length > 0)
+        {
+            if (nameFilter == "")
+            {
+                assets.AddRange(assetsResourceS);
+            }
+            else
+            {
+                foreach (T t in assetsResourceS)
+                {
+                    if (t.name.Contains(nameFilter))
+                    {
+                        assets.Add(t);
+                    }
+                }
+            }
+        }
+#if UNITY_EDITOR
+        string[] guids = AssetDatabase.FindAssets($"t: {typeof(T).Name} {nameFilter}");
         for (int i = 0; i < guids.Length; i++)
         {
             string assetPath = AssetDatabase.GUIDToAssetPath(guids[i]);
             T asset = AssetDatabase.LoadAssetAtPath<T>(assetPath);
             if (asset != null)
             {
-                assets.Add(asset);
+                assets.AddUnique(asset);
             }
         }
+        assets.ClearNulls();
         return assets;
 #else
-        return new List<T>();
+        return assets;
 #endif
     }
     public static List<UnityEngine.Object> FindAssetsByType(System.Type type, string nameFilter = "")
