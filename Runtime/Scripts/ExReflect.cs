@@ -22,11 +22,12 @@ public class ExReflect
     public static List<Type> GetDerivedClasses<T>(Assembly assembly) => GetDerivedClasses(assembly, typeof(T));
     public static List<Type> GetDerivedClasses(Assembly assembly, Type derivedType) => assembly.GetTypes().Where(t => t != derivedType && derivedType.IsAssignableFrom(t)).ToList();
     public static List<Type> GetDerivedClassesAllAsseblys<T>() => AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes()).Where(t => t != typeof(T) && typeof(T).IsAssignableFrom(t)).ToList();
+    public static List<Type> GetDerivedClassesAllAsseblys(Type type) => AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes()).Where(t => t != type && type.IsAssignableFrom(t)).ToList();
 
     public static bool HasDerivedClasses<T>() => HasDerivedClasses<T>(Assembly.GetAssembly(typeof(T)));
     public static bool HasDerivedClasses<T>(Assembly assembly) => HasDerivedClasses(assembly, typeof(T));
     public static bool HasDerivedClasses(Assembly assembly, Type derivedType) => assembly.GetTypes().Where(t => t != derivedType && derivedType.IsAssignableFrom(t)).Count() > 0;
-
+    public static bool HasDerivedClassesAllAsseblys(Type derivedType) => AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes()).Where(t => t != derivedType && derivedType.IsAssignableFrom(t)).Count() > 0;
 
 
     public static List<Type> GetFinalDerivedClasses<T>() => GetFinalDerivedClasses(Assembly.GetAssembly(typeof(T)), typeof(T));

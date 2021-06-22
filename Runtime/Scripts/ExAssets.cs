@@ -148,7 +148,6 @@ public static class ExAssets
     /// <returns></returns>
     public static List<T> FindAssetsByType<T>(string nameFilter = "") where T : UnityEngine.Object
     {
-
         List<T> assets = new List<T>();
         T[] assetsResourceS = Resources.FindObjectsOfTypeAll<T>();
         if (assetsResourceS != null && assetsResourceS.Length > 0)
