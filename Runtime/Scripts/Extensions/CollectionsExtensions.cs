@@ -328,11 +328,7 @@ public static class CollectionsExtensions
 #if UNITY_EDITOR
         UnityEditor.ArrayUtility.Add(ref array, item);
         return array;
-#else
-        //      List<T> l = array.ToList ();
-        //      l.Clear ();
-        //      return l.ToArray ();
-
+#else 
         T[] array2 = new T[array.Length + 1];
         for (int i = 0; i < array.Length; i++)
         {
@@ -341,6 +337,14 @@ public static class CollectionsExtensions
         array2[array.Length] = item;
         return array2;
 #endif
+    }
+    public static T[] AddUnique<T>(this T[] array, T item)
+    {
+        if (!array.Contains(item))
+        {
+            array = Add(array, item);
+        }
+        return array;
     }
 
     public static T[] AddRange<T>(this T[] array, T[] item)
@@ -355,6 +359,13 @@ public static class CollectionsExtensions
 #endif
     }
 
+
+    public static T[] AddRangeUnique<T>(this T[] array, T[] item)
+    {
+        List<T> l = array.ToList();
+        l.AddRangeUnique(item);
+        return array = l.ToArray();
+    }
     public static T[] Remove<T>(this T[] array, T item)
     {
 #if UNITY_EDITOR

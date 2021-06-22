@@ -248,6 +248,13 @@ public static class ExAssets
     }
 
 
+    public static void DeleteAsset(ScriptableObject scriptable)
+    {
+        string path = AssetDatabase.GetAssetPath(scriptable);
+        AssetDatabase.DeleteAsset(path);
+    }
+
+
 
 
 
