@@ -58,24 +58,39 @@ public static class ExAssets
 #endif
     }
 
-    public static T CreateAsset<T>(string path, string name, bool refresh = true) where T : ScriptableObject
+    public static T CreateAsset<T>(string path, string name, bool refresh = true, bool avoidIfExist = false) where T : ScriptableObject
     {
 #if UNITY_EDITOR 
-        return CreateAsset(path, name, typeof(T), refresh) as T;
+        return CreateAsset(path, name, typeof(T), refresh, avoidIfExist) as T;
 #else
         return default(T);
 #endif
     }
-    public static ScriptableObject CreateAsset(string path, string name, System.Type type, bool refresh = true)
+    public static ScriptableObject CreateAsset(string path, string name, System.Type type, bool refresh = true, bool avoidIfExist = false)
     {
 #if UNITY_EDITOR
-        ScriptableObject asset = ScriptableObject.CreateInstance(type);
         if (path.EndsWith("/"))
         {
             path = path.Remove(path.Length - 1);
         }
-        string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath(path + "/" + name + ".asset");
+        string finalPath = $"{path}/{name}.asset";
+        string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath(finalPath);
 
+        if (avoidIfExist)
+        {
+            Object obj = AssetDatabase.LoadAssetAtPath(finalPath, type);
+            if (obj)
+            {
+                return obj as ScriptableObject;
+            }
+
+            if (finalPath != assetPathAndName)
+            {
+                return null;
+            }
+        }
+
+        ScriptableObject asset = ScriptableObject.CreateInstance(type);
         AssetDatabase.CreateAsset(asset, assetPathAndName);
 
         if (refresh)
