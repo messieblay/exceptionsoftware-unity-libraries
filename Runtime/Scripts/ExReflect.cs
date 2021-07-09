@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-public class ExReflect
+public static class ExReflect
 {
     public static Assembly CurrentAssembly => Assembly.GetExecutingAssembly();
     #region Classes
@@ -163,4 +163,6 @@ public class ExReflect
 
     #endregion
     public static IEnumerable<Type> GetTypesAllAssemblies() => AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes());
+
+    public static bool IsStatic(this PropertyInfo propertyInfo) => ((propertyInfo.CanRead && propertyInfo.GetMethod.IsStatic) || (propertyInfo.CanWrite && propertyInfo.SetMethod.IsStatic));
 }
