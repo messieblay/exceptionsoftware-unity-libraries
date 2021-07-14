@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using UnityEditor;
 using UnityEngine;
 
 
@@ -82,6 +83,21 @@ public class FileUtils
     public static string LocateFilePath(string filename)
     {
         return ConvertPathToRelative(AddEndingSlash(Path.GetDirectoryName(LocateFile(filename)).Replace("\\", BACKSLASH)));
+    }
+
+    public static void DeleteEmptyFolders(string startLocation)
+    {
+        foreach (var directory in Directory.GetDirectories(startLocation))
+        {
+            DeleteEmptyFolders(directory);
+            if (Directory.GetFiles(directory).Length == 0 && Directory.GetDirectories(directory).Length == 0)
+            {
+                string dirToDelete = directory.Replace("\\", "/");
+                FileUtil.DeleteFileOrDirectory(dirToDelete);
+                FileUtil.DeleteFileOrDirectory($"{dirToDelete}.meta");
+            }
+        }
+        AssetDatabase.Refresh();
     }
 
     #endregion
