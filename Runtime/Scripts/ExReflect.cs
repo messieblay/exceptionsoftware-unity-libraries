@@ -118,6 +118,8 @@ public static class ExReflect
     public static List<PropertyInfo> GetPropertiesWithAttribute<T>(Assembly assembly) => assembly.GetTypes().SelectMany(t => t.GetProperties()).Where(m => m.GetCustomAttributes(typeof(T), false).Length > 0).ToList();
     public static List<PropertyInfo> GetPropertiesWithAttributeAllAssemblies<T>() => GetTypesAllAssemblies().SelectMany(t => t.GetProperties()).Where(m => m.GetCustomAttributes(typeof(T), false).Length > 0).ToList();
 
+
+
     #endregion
 
 
@@ -165,4 +167,6 @@ public static class ExReflect
     public static IEnumerable<Type> GetTypesAllAssemblies() => AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes());
 
     public static bool IsStatic(this PropertyInfo propertyInfo) => ((propertyInfo.CanRead && propertyInfo.GetMethod.IsStatic) || (propertyInfo.CanWrite && propertyInfo.SetMethod.IsStatic));
+
+    //public static 
 }
