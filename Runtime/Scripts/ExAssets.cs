@@ -271,7 +271,7 @@ public static class ExAssets
 
 
 
-    private static void CleanMissingSubAssets(UnityEngine.Object toDelete)
+    public static void CleanMissingSubAssets(UnityEngine.Object toDelete)
     {
         //Create a new instance of the object to delete
         ScriptableObject newInstance = ScriptableObject.CreateInstance(toDelete.GetType());
