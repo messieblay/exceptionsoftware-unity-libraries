@@ -10,10 +10,22 @@ public static class TransformExtensions
     {
         while (t.childCount > 0)
         {
-            GameObject.DestroyImmediate(t.GetChild(0).gameObject);
+            if (Application.isPlaying)
+            {
+                GameObject.Destroy(t.GetChild(0).gameObject);
+            }
+            else
+            {
+                GameObject.DestroyImmediate(t.GetChild(0).gameObject);
+            }
         }
     }
-
+    public static void SetAsSibling(this Transform obj, Transform target)
+    {
+        obj.parent = target;
+        obj.parent = target.parent;
+        obj.SetSiblingIndex(target.GetSiblingIndex() + 1);
+    }
     /// <summary>
     /// Migrate childs.
     /// </summary>
