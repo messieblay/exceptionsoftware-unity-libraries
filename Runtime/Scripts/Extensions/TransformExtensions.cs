@@ -10,14 +10,11 @@ public static class TransformExtensions
     {
         while (t.childCount > 0)
         {
-            if (Application.isPlaying)
-            {
-                GameObject.Destroy(t.GetChild(0).gameObject);
-            }
-            else
-            {
-                GameObject.DestroyImmediate(t.GetChild(0).gameObject);
-            }
+#if UNITY_EDITOR
+            GameObject.DestroyImmediate(t.GetChild(0).gameObject);
+#else
+GameObject.Destroy(t.GetChild(0).gameObject);
+#endif 
         }
     }
     public static void SetAsSibling(this Transform obj, Transform target)
