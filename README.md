@@ -55,3 +55,8 @@ Tools & Libraries:
 # How to use :
 
   - There's a unity package you can just import it in your projects
+
+
+Notes: 
+This project still having obsolete classes & methods.
+
