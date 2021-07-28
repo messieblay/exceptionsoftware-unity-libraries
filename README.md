@@ -39,15 +39,16 @@ Utilities
 Tools & Libraries:
  - Editor styles and Icons viwer
  ![image](https://user-images.githubusercontent.com/79903069/127274582-075dd3f0-8dd4-48a1-a7d6-60a1cd687e23.png)
-
  - Editor pref
- - Improved Transform component 
+ - Improved Transform component: Better colors and buttons to easly reset values. Position & Rotation to (0,0,0) and Scale to (1,1,1)
  ![image](https://user-images.githubusercontent.com/79903069/127273672-35ada0ef-1c59-45b4-ad7e-2323dd7dea00.png)
  - Find & Delete missing components
- - Forze compile
  - GUI Functions: FadesGroups, ScrollViews, Buttons, Colors, Area, RectDrawing, etc.
- - Automate funtion in multiple scenes
+ - Automate funtions in all scenes
+ - Forze compile scripts
  - Autoupdate all ExSoftware Packages included in project
+  ![image](https://user-images.githubusercontent.com/79903069/127275080-edc9ef27-201c-4918-a22d-0150c0daf246.png)
+
  - And more!
 
 
