@@ -1,7 +1,10 @@
 # exception-unity-libraries
-Librerias para el manejo de Unity
 
 This is a code library for Unity c#. 
+
+
+I'm glad to have any suggestions or comments on the library. 
+Is not a closed project
 
 Extensions:
 - Collections
@@ -14,7 +17,7 @@ Extensions:
 - Rect
 - Instancing
 
-Serializable Types:
+XML Serializable Types:
 - Dictionary
 - Vector2
 - Vector3
@@ -30,3 +33,10 @@ Utilities
 - C# Threading
 - Hierarchy Icons by Code
 - XML
+
+
+# How to use :
+
+  - There's a unity package you can just import it in your projects
+
+
