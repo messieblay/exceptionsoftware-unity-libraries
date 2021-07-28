@@ -4,10 +4,7 @@ using System.Collections;
 public static class Instancex
 {
 
-    public static GameObject Create(string name)
-    {
-        return new GameObject(name);
-    }
+    public static GameObject Create(string name) => new GameObject(name);
 
     public static GameObject Create(string name, Transform parent)
     {
@@ -17,10 +14,7 @@ public static class Instancex
         return go;
     }
 
-    public static Transform CreateTransform(string name)
-    {
-        return Create(name).transform;
-    }
+    public static Transform CreateTransform(string name) => Create(name).transform;
 
     public static Transform CreateTransform(string name, Transform parent)
     {
@@ -30,10 +24,7 @@ public static class Instancex
         return t;
     }
 
-    public static T Create<T>(string name) where T : Component
-    {
-        return Create(name).AddComponent<T>();
-    }
+    public static T Create<T>(string name) where T : Component => Create(name).AddComponent<T>();
 
     public static T Create<T>(string name, Transform parent) where T : Component
     {
@@ -41,34 +32,6 @@ public static class Instancex
         v.transform.SetParent(parent, false);
         return v;
     }
-
-    public static void TryRemoveComponent<T>(this GameObject gameobject) where T : Component
-    {
-        T c = gameobject.GetComponent<T>();
-        if (c != null)
-        {
-            if (Application.isPlaying)
-            {
-                GameObject.Destroy(c);
-            }
-            else
-            {
-                GameObject.DestroyImmediate(c);
-            }
-        }
-    }
-    public static void TryRemoveComponent<T>(this Component component) where T : Component => component.gameObject.TryRemoveComponent<T>();
-
-    public static T TryAddComponent<T>(this GameObject gameobject) where T : Component
-    {
-        T c = gameobject.GetComponent<T>();
-        if (c == null)
-        {
-            return gameobject.AddComponent<T>();
-        }
-        return c;
-    }
-    public static T TryAddComponent<T>(this Component component) where T : Component => component.gameObject.TryAddComponent<T>();
 
     public static GameObject TryCreate(string name, Transform parent)
     {
@@ -92,10 +55,7 @@ public static class Instancex
         return t;
     }
 
-    public static T Singleton<T>() where T : Component
-    {
-        return Singleton<T>(typeof(T).Name);
-    }
+    public static T Singleton<T>() where T : Component => Singleton<T>(typeof(T).Name);
 
     public static T Singleton<T>(string name) where T : Component
     {
@@ -107,11 +67,7 @@ public static class Instancex
         return single;
     }
 
-    public static T Copy<T>(T so) where T : ScriptableObject
-    {
-        return GameObject.Instantiate(so) as T;
-    }
-
+    public static T Copy<T>(T so) where T : ScriptableObject => GameObject.Instantiate(so) as T;
 
 
     #region Instantiate
@@ -131,15 +87,7 @@ public static class Instancex
     }
 
 
-    public static GameObject Instantiate(this GameObject g)
-    {
-        if (g == null)
-        {
-            return null;
-        }
-        return GameObject.Instantiate(g) as GameObject;
-    }
-
+    public static GameObject Instantiate(this GameObject g) => g == null ? null : GameObject.Instantiate(g) as GameObject;
     public static GameObject Name(this GameObject g, string name)
     {
         if (g == null)
@@ -209,15 +157,6 @@ public static class Instancex
         g.transform.SetParent(parent, false);
         return g;
     }
-
-    //  public static GameObject Parent (this GameObject g, Transform parent, bool zeroPosRot) {
-    //      g.transform.parent = parent;
-    //      if (zeroPosRot) {
-    //          g.transform.localPosition = Vector3.zero;
-    //          g.transform.localRotation = Quaternion.identity;
-    //      }
-    //      return g;
-    //  }
 
     public static GameObject MoveLocalPosition(this GameObject g, Vector3 localPosition)
     {

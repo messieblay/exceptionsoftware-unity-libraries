@@ -1079,7 +1079,7 @@ namespace ExceptionSoftware.ExEditor
         #endregion
 
         #region Draw Array
-
+        [System.Obsolete]
         public static void DrawSerializedField(SerializedObject so, string propertyKey)
         {
             SerializedProperty property = so.FindProperty(propertyKey);
@@ -1093,92 +1093,6 @@ namespace ExceptionSoftware.ExEditor
 
         #endregion
 
-        #region Assembly
-
-        //      static Assembly[] _asms;
-        //
-        //      static void TryLoadAssembly () {
-        //          _asms = System.AppDomain.CurrentDomain.GetAssemblies ();
-        //      }
-        //
-        //      ExMainMenuGroupInfo TryLoadGroupEditors (string idGroup) {
-        //          ExMainMenuGroupInfo menugroup;
-        //          if (!_menuGroupsStack.TryGetValue (idGroup, out menugroup)) {
-        //              menugroup = new ExMainMenuGroupInfo (idGroup, LoadGroupEditors (idGroup));
-        //              _menuGroupsStack.Add (idGroup, menugroup);
-        //          }
-        //          return menugroup;
-        //      }
-        //
-        //      //  if(_menuGroupsStack.TryGetValue(group, out ))
-        //
-        //      static List<ExMainMenuItemInfo> LoadGroupEditors (string group) {
-        //          TryLoadAssembly ();
-        //
-        //          // find all the classes that inherit from DatabaseEdBase
-        //          List<System.Type> foundEdTypes = new List<System.Type> ();
-        //
-        //          float progress = 0f;
-        //          float step = 1f / (float)_asms.Length;
-        //          //EditorUtility.DisplayProgressBar("Updating ...", "Updating Database Editor cache", progress);
-        //
-        //          for (int i = 0; i < _asms.Length; i++) {
-        //              progress += step;
-        //              //EditorUtility.DisplayProgressBar("Updating ...", "Updating Database Editor cache" , progress);
-        //              System.Type[] types = _asms [i].GetExportedTypes ();
-        //              for (int j = 0; j < types.Length; j++) {
-        ////                    if (types [j].IsClass && typeof(ExWindow).IsAssignableFrom (types [j]) && types [j].Name != "DatabaseEdBase") {
-        ////                        foundEdTypes.Add (types [j]);
-        ////                    }
-        //              }
-        //          }
-        //
-        //          // extract some meta data and create the editor instances
-        //          List<ExMainMenuItemInfo> eds = new List<ExMainMenuItemInfo> ();
-        //
-        //          progress = 0f;
-        //          step = 1f / (float)foundEdTypes.Count;
-        //          //EditorUtility.DisplayProgressBar("Updating ...", "Updating Database Editor cache", progress);
-        //
-        //          for (int i = 0; i < foundEdTypes.Count; i++) {
-        //              progress += step;
-        //              //EditorUtility.DisplayProgressBar("Updating ...", "Updating Database Editor cache", progress);
-        //
-        //              MainMenuItemAttribute att = null;
-        //              System.Object[] attribs = foundEdTypes [i].GetCustomAttributes (typeof(MainMenuItemAttribute), false);
-        //              if (attribs.Length > 0) {   // find the 1st occurance of DatabaseEditorAttribute
-        //                  for (int j = 0; j < attribs.Length; j++) {
-        //                      att = (attribs [j] as MainMenuItemAttribute);
-        //                      if (att != null)
-        //                          break;
-        //                  }
-        //              }
-        //
-        //              if (att != null && att.Group == group) {    // now create the editor instance
-        //                  ExMainMenuItemInfo nfo = new ExMainMenuItemInfo ();
-        //                  nfo.priority = att.Priority;
-        //                  nfo.name = att.Name;
-        ////                nfo.editor = (ExWindow)System.Activator.CreateInstance (foundEdTypes [i]);
-        ////                    nfo.editor = (ExWindow)ScriptableObject.CreateInstance (foundEdTypes [i]);
-        //                  eds.Add (nfo);
-        //              }
-        //              /*
-        //          else {
-        //              Debug.LogError ("Invalid Database Editor [" + foundEdTypes [i].ToString () + "] encountered. Please check the documentation on how to create custom Database Editors.");
-        //          }
-        //          */
-        //          }
-        //
-        //
-        //          // sort the editors according to priority
-        //          eds.Sort (delegate(ExMainMenuItemInfo a, ExMainMenuItemInfo b) {
-        //              return a.priority.CompareTo (b.priority);
-        //          });
-        //          return eds;
-        //          //EditorUtility.ClearProgressBar();
-        //      }
-
-        #endregion
 
     }
 
