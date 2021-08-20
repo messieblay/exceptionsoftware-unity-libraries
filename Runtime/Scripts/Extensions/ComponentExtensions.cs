@@ -4,7 +4,9 @@ using UnityEngine;
 
 public static class ComponentExtensions
 {
+    public static T AddComponent<T>(this GameObject go, T toAdd) where T : Component => go.AddComponent<T>().GetCopyOf(toAdd) as T;
 
+    public static void TryRemoveComponent<T>(this Component component) where T : Component => component.gameObject.TryRemoveComponent<T>();
     public static void TryRemoveComponent<T>(this GameObject gameobject) where T : Component
     {
         T c = gameobject.GetComponent<T>();
@@ -20,19 +22,13 @@ public static class ComponentExtensions
             }
         }
     }
-    public static void TryRemoveComponent<T>(this Component component) where T : Component => component.gameObject.TryRemoveComponent<T>();
 
-    public static T TryAddComponent<T>(this GameObject gameobject) where T : Component
-    {
-        T c = gameobject.GetComponent<T>();
-        if (c == null)
-        {
-            return gameobject.AddComponent<T>();
-        }
-        return c;
-    }
-    public static T AddComponent<T>(this GameObject go, T toAdd) where T : Component => go.AddComponent<T>().GetCopyOf(toAdd) as T;
+    public static T TryAddComponent<T>(this GameObject gameobject) where T : Component => gameobject.GetComponent<T>() ?? gameobject.AddComponent<T>();
     public static T TryAddComponent<T>(this Component component) where T : Component => component.gameObject.TryAddComponent<T>();
+    public static T GetOrAddComponent<T>(this GameObject gameobject) where T : Component => gameobject.GetComponent<T>() ?? gameobject.AddComponent<T>();
+    public static T GetOrAddComponent<T>(this Component component) where T : Component => component.gameObject.GetOrAddComponent<T>();
+    public static bool HasComponent<T>(this GameObject gameobject) where T : Component => gameobject.GetComponent<T>() != null;
+    public static bool HasComponent<T>(this Component component) where T : Component => component.GetComponent<T>() != null;
 
     public static T GetCopyOf<T>(this Component comp, T other) where T : Component
     {

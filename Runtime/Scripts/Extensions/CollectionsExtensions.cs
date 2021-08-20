@@ -306,6 +306,21 @@ public static class CollectionsExtensions
         return list;
     }
 
+    public static bool TryGet<T>(this List<T> list, System.Predicate<T> elem, out T result)
+    {
+        result = default(T);
+        if (elem == null) return false;
+        for (int i = 0; i < list.Count; i++)
+        {
+            if (elem(list[i]))
+            {
+                result = list[i];
+                return true;
+            }
+        }
+        return false;
+    }
+
     #endregion
 
     #region Arrays
